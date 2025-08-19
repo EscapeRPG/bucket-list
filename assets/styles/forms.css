@@ -1,0 +1,70 @@
+#wish {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    input:not([type='checkbox']), textarea {
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin: 0;
+        cursor: pointer;
+        background-color: white;
+        color: black;
+        background-color: rgba(255, 224, 238, 0.8);
+
+        &:hover {
+            background-color: rgb(255, 224, 238);
+        }
+
+        &:focus {
+            background-color: #ffc5a1;
+            border: none;
+            outline: none;
+        }
+    }
+
+    select {
+        width: calc(100% + 20px);
+    }
+}
+
+button {
+    margin: auto;
+}
+
+button, .form-btn {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    width: 200px;
+    cursor: pointer;
+    background-color: #f36bf3;
+    text-align: center;
+
+    &:hover {
+        background-color: orange;
+    }
+}
+
+.delete-btn {
+    background-color: rgb(255, 84, 84);
+}
+
+.wish-btn {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}

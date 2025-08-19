@@ -1,4 +1,4 @@
-import { Controller } from '@hotwired/stimulus';
+import {Controller} from '@hotwired/stimulus';
 
 /*
  * This is an example Stimulus controller!
@@ -11,6 +11,42 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
     connect() {
-        this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
+        const body = document.body,
+            darkButton = document.getElementById("darkbutton");
+
+        body.classList.add('no-transition');
+
+        this.checkDarkMode();
+    }
+    checkDarkMode() {
+        const body = document.body,
+            darkButton = document.getElementById("darkbutton");
+
+        if (localStorage.getItem("darkmode") === "on") {
+            body.classList.add("darkmode");
+            darkButton.innerText = "☼";
+        }
+
+        void body.offsetWidth;
+
+        body.classList.remove('no-transition');
+    }
+    rayer() {
+        this.element.classList.toggle('raye');
+    }
+
+    darkmode() {
+        const body = document.body,
+            darkButton = document.getElementById("darkbutton");
+
+        if (body.className === "darkmode") {
+            body.classList.remove("darkmode");
+            localStorage.setItem("darkmode", "off");
+            darkButton.innerText = "\u263d";
+        } else {
+            body.classList.toggle("darkmode");
+            localStorage.setItem("darkmode", "on");
+            darkButton.innerText = "☼";
+        }
     }
 }

@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello WishController!{% endblock %}
+{% block title %}Wish Detail - Bucket List{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/forms.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>La liste des buckets de la bucket-list !</h1>
+    <main>
+        <div class="wish-detail">
+            <h2>{{ wish.title }}</h2>
+            <p>
+                {{ wish.description }}
+            </p>
+            <div class="bucket-footer">
+                <div>{{ wish.author }}</div>
+                <div>-</div>
+                <div>{{ wish.dateCreated|date('d-m-Y') }}</div>
+            </div>
+        </div>
+        <div class="wish-btn">
+            <a href="{{ path('wish_delete', { id : wish.id, token : csrf_token('delete' ~ wish.id) }) }}"
+               onclick="return confirm('Are you sure?')">
+                <div class="form-btn delete-btn">Delete wish</div>
+            </a>
+            <a href="{{ path('wish_update', { id : wish.id, token : csrf_token('update' ~ wish.id) }) }}">
+                <div class="form-btn">Edit wish</div>
+            </a>
+        </div>
+    </main>
 {% endblock %}

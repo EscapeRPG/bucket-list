@@ -2,18 +2,12 @@
 
 {% block title %}Wish Detail - Bucket List{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/forms.css') }}">
+{% endblock %}
+
 {% block body %}
     <main>
-        <div class="wish-detail">
-            <h2>{{ wish.title }}</h2>
-            <p>
-                {{ wish.description }}
-            </p>
-            <div class="bucket-footer">
-                <div>{{ wish.author }}</div>
-                <div>-</div>
-                <div>{{ wish.dateCreated|date('d-m-Y') }}</div>
-            </div>
-        </div>
+        {{ form(wish_form) }}
     </main>
 {% endblock %}
