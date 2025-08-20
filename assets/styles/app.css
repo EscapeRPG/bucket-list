@@ -7,3 +7,9 @@ body {
 .no-transition {
     transition: none !important;
 }
+
+.invalid-feedback {
+    color: red;
+    font-style: italic;
+    font-size: 0.8em;
+}

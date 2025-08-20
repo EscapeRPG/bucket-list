@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Wish;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,6 +22,16 @@ class WishType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Title :',
             ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'label' => 'Category :',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.name', 'ASC');
+                },
+                'placeholder' => '----- Choose Category -----',
+            ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description :',
                 'attr' => [
@@ -26,7 +39,7 @@ class WishType extends AbstractType
                 ]
             ])
             ->add('author', TextType::class, [
-                'label' => 'Author :',
+                'label' => 'Your name :',
             ])
             ->add('isPublished', CheckboxType::class, [
                 'label' => 'Is Published :',

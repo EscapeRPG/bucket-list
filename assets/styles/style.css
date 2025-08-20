@@ -36,6 +36,14 @@ header {
         max-width: 50px;
     }
 
+    h1 a {
+        color: black;
+
+        &:hover {
+            color: white;
+        }
+    }
+
     .nav-logo {
         margin-left: 40px;
     }
@@ -129,10 +137,11 @@ main {
     }
 
     .wish {
-        width: 400px;
+        width: 300px;
+        min-height: 100px;
         cursor: pointer;
         margin: 20px;
-        padding: 10px;
+        padding: 10px 80px;
         border-radius: 20px;
         text-align: center;
         background: var(--wishes);
@@ -141,15 +150,28 @@ main {
         font-weight: bold;
         text-transform: capitalize;
         box-shadow: var(--box-shadows);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-        &:hover {
+        .wish-category {
+            font-style: italic;
+            font-size: 0.8em;
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        &:hover, &:hover .wish-category {
             color: #ffffff;
         }
     }
 
-    .raye {
+    .raye, .raye .wish-category {
         text-decoration: line-through;
         color: #f49797;
+    }
+
+    .raye {
         background: var(--wishes-clicked);
     }
 
@@ -162,6 +184,7 @@ main {
         background: var(--wishes);
         text-decoration: none;
         box-shadow: var(--box-shadows);
+        color: black;
 
         h2 {
             text-decoration: underline;
@@ -178,8 +201,39 @@ main {
             border-top: 1px solid white;
             padding: 20px;
             color: white;
-            text-shadow: 2px 2px rgba(30, 73, 101, 0.7);
+            text-shadow: 1px 1px rgba(30, 73, 101, 0.7);
         }
+    }
+}
+
+.wish-container {
+    position: relative;
+}
+
+.validate-wish {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: calc(50% - 20px);
+    right: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: red;
+    font-weight: bold;
+
+    &:hover {
+        background-color: white;
+        color: limegreen;
+    }
+}
+
+.validated {
+    color: limegreen;
+
+    &:hover {
+        background-color: rgba(255, 0, 0, 0.4);
+        color: #ffcece;
     }
 }
 

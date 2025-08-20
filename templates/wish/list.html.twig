@@ -7,16 +7,18 @@
         <h1>La liste des buckets de la bucket-list !</h1>
         <div class="wish-list">
             {% for wish in wishes %}
-                <a href="{{ path('wish_detail', {'id' : wish.id}) }}">
-                    <div class="wish">
-                        {{ wish.title }}
-                    </div>
-                </a>
+                <div class="wish-container" data-controller="hello">
+                    <a href="{{ path('wish_detail', {'id' : wish.id}) }}">
+                        <div class="wish">
+                            {{ wish.title }}
+                            <div class="wish-category">
+                                ({{ wish.category.name }})
+                            </div>
+                        </div>
+                    </a>
+                    <button class="validate-wish" data-action="click->hello#rayer mouseover->hello#checkWishState mouseout->hello#checkWishState">✗</button>
+                </div>
             {% endfor %}
-
-            <div class="wish" data-controller="hello" data-action="click->hello#rayer">Battre Camille à Skull King
-                (répétable)
-            </div>
         </div>
     </main>
 {% endblock %}

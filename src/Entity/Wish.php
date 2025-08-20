@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WishRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -32,6 +33,10 @@ class Wish
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $dateUpdated = null;
+
+    #[ORM\ManyToOne(inversedBy: 'wishes')]
+    #[Assert\NotBlank()]
+    private ?Category $category = null;
 
     public function __construct() {
         $this->dateCreated = new \DateTime();
@@ -109,10 +114,22 @@ class Wish
         return $this->dateUpdated;
     }
 
-    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function setDateUpdated(): static
     {
         $this->dateUpdated = new \DateTime();
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
