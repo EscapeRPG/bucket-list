@@ -3,22 +3,47 @@
 {% block title %}Wishes list - Bucket List{% endblock %}
 
 {% block body %}
-    <main>
+    <main data-controller="wishes">
         <h1>La liste des buckets de la bucket-list !</h1>
         <div class="wish-list">
             {% for wish in wishes %}
                 <div class="wish-container" data-controller="hello">
                     <a href="{{ path('wish_detail', {'id' : wish.id}) }}">
-                        <div class="wish">
+                        <div class="wish" id="wish-{{ wish.id }}">
                             {{ wish.title }}
                             <div class="wish-category">
                                 ({{ wish.category.name }})
                             </div>
                         </div>
                     </a>
-                    <button class="validate-wish" data-action="click->hello#rayer mouseover->hello#checkWishState mouseout->hello#checkWishState">✗</button>
+                    <button class="validate-wish"
+                            data-action="click->wishes#rayer mouseover->wishes#checkWishState mouseout->wishes#changeInnerText"></button>
                 </div>
             {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {% if pages != 1 %}
+                {% if page == 1 %}
+                    <div></div>
+                    <div></div>
+                    <div><a href="{{ path('wish_list', {page: page}) }}">{{ page }}</a></div>
+                    <div><a href="{{ path('wish_list', {page: page + 1}) }}">Next ></a></div>
+                    <div><a href="{{ path('wish_list', {page: pages}) }}">Last >></a></div>
+                {% elseif page < pages %}
+                    <div><a href="{{ path('wish_list', {page: 1}) }}"><< First</a></div>
+                    <div><a href="{{ path('wish_list', {page: page - 1}) }}">< Prev</a></div>
+                    <div><a href="{{ path('wish_list', {page: page}) }}">{{ page }}</a></div>
+                    <div><a href="{{ path('wish_list', {page: page + 1}) }}">Next ></a></div>
+                    <div><a href="{{ path('wish_list', {page: pages}) }}">Last >></a></div>
+                {% else %}
+                    <div><a href="{{ path('wish_list', {page: 1}) }}"><< First</a></div>
+                    <div><a href="{{ path('wish_list', {page: page - 1}) }}">< Prev</a></div>
+                    <div><a href="{{ path('wish_list', {page: page}) }}">{{ page }}</a></div>
+                    <div></div>
+                    <div></div>
+                {% endif %}
+            {% endif %}
         </div>
     </main>
 {% endblock %}

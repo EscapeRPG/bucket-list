@@ -7,21 +7,32 @@ use App\Form\WishType;
 use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class WishController extends AbstractController
 {
-    #[Route('/list', name: 'wish_list')]
-    public function list(WishRepository $wishRepository): Response
+    #[Route('/list/{page}',
+        name: 'wish_list',
+        requirements: ['page' => '\d+'],
+        defaults: ['page' => 1])]
+    public function list(WishRepository $wishRepository, ParameterBagInterface $bag, int $page): Response
     {
+        $limit = $bag->get('wishes')['nb_max'];
         $criterias = ['isPublished' => 1];
+        $offset = ($page - 1) * $limit;
 
-        $wishes = $wishRepository->findBy($criterias, ['dateCreated' => 'DESC']);
+        // $wishes = $wishRepository->findBy($criterias, ['dateCreated' => 'DESC']);
+        $wishes = $wishRepository->getWishesWithCategory($limit, $offset);
+
+        $nombreDePages = ceil($wishRepository->count($criterias) / $limit);
 
         return $this->render('wish/list.html.twig', [
             'wishes' => $wishes,
+            'pages' => $nombreDePages,
+            'page' => $page
         ]);
     }
 

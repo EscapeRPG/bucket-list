@@ -32,30 +32,7 @@ export default class extends Controller {
         body.classList.remove('no-transition');
     }
 
-    rayer() {
-        const button = event.currentTarget;
-        const wishDiv = button.closest('.wish-container').querySelector('.wish');
-        wishDiv.classList.toggle('raye');
-
-        if (wishDiv.classList.contains('raye')) {
-            button.innerText = '✗';
-            button.classList.add('validated');
-        } else {
-            button.innerText = '✓';
-            button.classList.remove('validated');
-        }
-    }
-
-    checkWishState() {
-        const button = event.currentTarget;
-            if (button.innerText === '✓') {
-                button.innerText = '✗';
-            } else {
-                button.innerText = '✓';
-            }
-    }
-
-    darkmode() {
+    darkMode() {
         const body = document.body,
             darkButton = document.getElementById("darkbutton");
 

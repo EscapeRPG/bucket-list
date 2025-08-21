@@ -14,7 +14,7 @@
 .darkmode {
     --links-hover: black;
     --main-color: white;
-    --main-bg-color: black;
+    --main-bg-color: #151b20;
     --box-shadows: 5px 5px 7px rgba(47, 91, 128, 0.7);
     --mix-mode: multiply;
     --mix-mode-hover: screen;
@@ -115,7 +115,7 @@ main {
     padding: 20px 40px;
 
     h1 {
-        border-bottom: 2px solid black;
+        border-bottom: 2px solid var(--main-color);
     }
 
     p {
@@ -141,7 +141,7 @@ main {
         min-height: 100px;
         cursor: pointer;
         margin: 20px;
-        padding: 10px 80px;
+        padding: 10px 70px;
         border-radius: 20px;
         text-align: center;
         background: var(--wishes);
@@ -173,6 +173,28 @@ main {
 
     .raye {
         background: var(--wishes-clicked);
+    }
+
+    .pagination {
+        margin: 40px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        div {
+            width: 100px;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+
+            &:hover {
+                color: orange;
+                text-decoration: underline;
+            }
+        }
     }
 
     .wish-detail {
@@ -212,12 +234,12 @@ main {
 
 .validate-wish {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    top: calc(50% - 20px);
+    width: 30px;
+    height: 30px;
+    top: calc(50% - 15px);
     right: 40px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.6);
     color: red;
     font-weight: bold;
