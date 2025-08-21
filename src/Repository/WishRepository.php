@@ -23,6 +23,7 @@ class WishRepository extends ServiceEntityRepository
             ->orderBy('w.dateCreated', 'DESC')
             ->leftjoin('w.category', 'category')
             ->addSelect('category')
+            ->andWhere('w.isPublished = 1')
             ->setFirstResult($offset)
             ->setMaxResults($nbPerPage)
             ->getQuery();

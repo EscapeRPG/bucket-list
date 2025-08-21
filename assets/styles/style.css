@@ -189,6 +189,7 @@ main {
 
         a {
             text-decoration: none;
+            color: var(--main-color);
 
             &:hover {
                 color: orange;
